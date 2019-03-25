@@ -1,47 +1,62 @@
 import React from "react";
-import { Button } from "react-bootstrap";
 import PropTypes from "prop-types";
 
-/**
- * @type decides whether to show job or jobless form
- * @return card component
- */
+import Dropdown from "../Dropdown/Dropdown";
+import TextInput from "../TextInput/TextInput";
 
-const card = ({ type, index, onChange, onSubmit }) => {
+const card = ({ index, type, currentStatus, occupation, company, income }) => {
   const content =
     type === "unemployed" ? (
-      <form onSubmit={onSubmit}>
+      <div>
         <p>What is your current status?</p>
-        <select onChange={onChange} name="currentStatus">
-          <option value="unemployed">Unemployed</option>
-          <option value="retired">Retired</option>
-        </select>
-        <Button onClick={onSubmit}>Add</Button>
-      </form>
+        <Dropdown
+          name={"currentStatus"}
+          value={currentStatus}
+          options={[
+            { label: "Unemployed", value: "unemployed" },
+            { label: "Retired", value: "retired" }
+          ]}
+        />
+      </div>
     ) : (
-      <form onSubmit={onSubmit}>
+      <div>
         <h4>Job {index + 1}</h4>
         <p>What is your occupation?</p>
-        <select onChange={onChange} name="occupation">
-          <option value="developer">Developer</option>
-          <option value="ceo">CEO</option>
-          <option value="marketing">Marketing</option>
-        </select>
+        <Dropdown
+          name={"occupation"}
+          value={occupation}
+          options={[
+            { label: "Developer", value: "developer" },
+            { label: "CEO", value: "ceo" },
+            { label: "Marketing", value: "marketing" }
+          ]}
+        />
         <p>Company name</p>
-        <input type="text" name="company" onChange={onChange} />
+        <TextInput
+          type="text"
+          value={company}
+          name="company"
+          placeholder="Company"
+        />
         <p>Income</p>
-        <input type="text" name="income" onChange={onChange} />
-        <Button onClick={onSubmit}>Add</Button>
-      </form>
+        <TextInput
+          type="text"
+          value={income}
+          name="income"
+          placeholder="Income"
+        />
+      </div>
     );
-  return <div>{content}</div>;
+  return <form>{content}</form>;
 };
 
 card.propTypes = {
-  type: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
-  onChange: PropTypes.func.isRequired,
-  onSubmit: PropTypes.func.isRequired
+  type: PropTypes.string.isRequired,
+  curentStatus: PropTypes.string,
+  occupation: PropTypes.string,
+  company: PropTypes.string,
+  income: PropTypes.string
 };
 
 export default card;

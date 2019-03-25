@@ -9,11 +9,11 @@ export default class App extends Component {
 
     this.state = {
       jobCount: 0,
+      data: [],
       currentStatus: "",
       occupation: "",
       company: "",
-      income: "",
-      data: []
+      income: ""
     };
   }
 
@@ -21,44 +21,15 @@ export default class App extends Component {
     this.setState({ jobCount });
   }
 
-  handleChange = e => {
-    const name = e.target.name;
-    const val = e.target.value;
-    this.setState({
-      [name]: val
-    });
-  };
-
-  handleSubmit = e => {
-    e.preventDefault();
-
-    const { currentStatus, occupation, company, income } = this.state;
-
-    this.setState(prevState => {
-      return {
-        ...prevState,
-        data: prevState.data.concat({
-          id: Date.now(),
-          currentStatus: currentStatus,
-          occupation: occupation,
-          company: company,
-          income: income
-        })
-      };
-    });
-  };
-
   render() {
-    const { jobCount } = this.state;
-    const { handleChange, handleSubmit } = this;
+    const { jobCount, currentStatus, occupation, company, income } = this.state;
     const cards =
       jobCount === 0 ? (
         <Card
           key={0}
           index={0}
           type="unemployed"
-          onChange={handleChange}
-          onSubmit={handleSubmit}
+          currentStatus={currentStatus}
         />
       ) : (
         [...Array(jobCount)].map((_, index) => (
@@ -66,8 +37,9 @@ export default class App extends Component {
             key={index}
             index={index}
             type="job"
-            onChange={handleChange}
-            onSubmit={handleSubmit}
+            occupation={occupation}
+            company={company}
+            income={income}
           />
         ))
       );

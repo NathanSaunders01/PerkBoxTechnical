@@ -1,46 +1,17 @@
 import React, { Component } from "react";
 import { Button, ListGroupItem, ListGroup } from "react-bootstrap";
 
-import TodoItem from "../Components/TodoItem/TodoItem";
-
 export default class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      data: [],
-      todo: ""
+      data: []
     };
   }
 
-  handleSubmit = e => {
-    e.preventDefault();
-
-    if (this.state.todo.length === 0) return false;
-
-    this.setState(prevState => {
-      return {
-        ...prevState,
-        data: prevState.data.concat({
-          id: Date.now(),
-          title: prevState.todo
-        })
-      };
-    });
-  };
-
-  handleTextChange = e => {
-    const name = e.target.name;
-    const val = e.target.value;
-    this.setState({
-      [name]: val
-    });
-  };
-
   render() {
-    const list = this.state.data.map(({ title, id }) => (
-      <TodoItem key={id} title={title} />
-    ));
+    const list = [...this.state.data];
 
     if (list.length === 0) {
       list.push(<i>Nothing added</i>);
