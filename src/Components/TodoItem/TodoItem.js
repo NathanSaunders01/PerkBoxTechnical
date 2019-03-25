@@ -8,4 +8,8 @@ const todoItem = ({ title }) => {
   );
 };
 
+todoItem.propTypes = {
+  title: PropTypes.string.isRequired
+};
+
 export default todoItem;

@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "react-bootstrap";
+import PropTypes from "prop-types";
 
 const card = ({ type, index, onChange, onSubmit }) => {
   const content =
@@ -29,6 +30,13 @@ const card = ({ type, index, onChange, onSubmit }) => {
       </form>
     );
   return <div>{content}</div>;
+};
+
+card.propTypes = {
+  type: PropTypes.string.isRequired,
+  index: PropTypes.number.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired
 };
 
 export default card;
