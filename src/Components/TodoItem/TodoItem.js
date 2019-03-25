@@ -1,5 +1,10 @@
 import React from "react";
 
+/**
+ * @title is the name of the todo item
+ * @return todo item component
+ */
+
 const todoItem = ({ title }) => {
   return (
     <div>

@@ -2,6 +2,11 @@ import React from "react";
 import { Button } from "react-bootstrap";
 import PropTypes from "prop-types";
 
+/**
+ * @type decides whether to show job or jobless form
+ * @return card component
+ */
+
 const card = ({ type, index, onChange, onSubmit }) => {
   const content =
     type === "unemployed" ? (
